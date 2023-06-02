@@ -1,0 +1,8 @@
+import './pages/home/tabla'
+import './pages/home/home'
+import './pages/crear/crear'
+import './pages/usuario/usuario'
+import './components/boton/boton'
+import './components/formulario/formulario'
+import './components/navbar/navbar'
+import './components/routing'

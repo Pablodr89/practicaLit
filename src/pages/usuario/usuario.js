@@ -28,11 +28,10 @@ class User extends LitElement {
 
     constructor() {
         super()
-
-        // this.addEventListener('getId', {
-        //     id: id
-        // })
-
+        this.addEventListener('getId', e => {
+            console.log(e)
+        })
+        
         // fetch('https://reqres.in/api/users/${this.id}', {method: 'GET'}).then((response) => {
         //     if(response.ok) return response.json()
         //     return Promise.reject(response)

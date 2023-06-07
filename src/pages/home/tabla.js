@@ -28,11 +28,19 @@ class Tabla extends LitElement {
 
     constructor() {
         super()
+        this.id = ''
     }
 
-    getId(id) {
-        this.id = id
-        console.log(this.id)
+    _handleClick(e) {
+        let detail = {
+            id: e.target.value
+        }
+        console.log(detail)
+        this.dispatchEvent(new CustomEvent('getId', {
+            detail: detail,
+            bubbles: true,
+            composed: true
+        }))
     }
 
     render() {
@@ -44,7 +52,7 @@ class Tabla extends LitElement {
                             <tr>
                                 <th class="text-center">Número Id</th>
                                 <th class="text-center">Nombre</th>
-                                <th class="text-center">Apellido</th>
+                                <th class="text-center">Apellidos</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Foto</th>
                                 <th></th>
@@ -64,7 +72,7 @@ class Tabla extends LitElement {
                                         </td>
                                         <td class="text-center align-middle">
                                             <wc-link to="/user">                                        
-                                                <wc-boton @click=${this.getId(user.id)} class="btn-warning" texto="Ver Usuario"></wc-boton>
+                                                <wc-boton @click=${this._handleClick} class="btn-warning" texto="Ver Usuario" .value="${user.id}"></wc-boton>
                                             </wc-link>
                                         </td>
                                     </tr>

@@ -4,7 +4,8 @@ class Tabla extends LitElement {
 
     static get properties() {
         return {
-            lista: {type: Array}
+            lista: {type: Array},
+            id: {type: String, bubbles: true, composed: true}
         }
     }
 
@@ -23,10 +24,15 @@ class Tabla extends LitElement {
             }
           `
         ]
-      }
+    }
 
     constructor() {
         super()
+    }
+
+    getId(id) {
+        this.id = id
+        console.log(this.id)
     }
 
     render() {
@@ -45,25 +51,26 @@ class Tabla extends LitElement {
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            ${
-                                this.lista.map(user => {
-                                    return html `
-                                        <tr>
-                                            <td class="text-center align-middle">${user.id}</td>
-                                            <td class="text-center align-middle">${user.nombre}</td>
-                                            <td class="text-center align-middle">${user.apellidos}</td>
-                                            <td class="text-center align-middle">${user.email}</td>
-                                            <td class="text-center">
-                                                <img class="img-fluid imagen" src="${user.foto}">
-                                            </td>
-                                            <td class="text-center align-middle">
-                                                <wc-boton class="btn-warning" texto="Ver Usuario"></wc-boton>
-                                            </td>
-                                        </tr>
-                                    `
-                                })
-                            }
+                        ${
+                            this.lista.map(user => {
+                                return html `
+                                    <tr>
+                                        <td class="text-center align-middle">${user.id}</td>
+                                        <td class="text-center align-middle">${user.first_name}</td>
+                                        <td class="text-center align-middle">${user.last_name}</td>
+                                        <td class="text-center align-middle">${user.email}</td>
+                                        <td class="text-center">
+                                            <img class="img-fluid imagen" src="${user.avatar}">
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <wc-link to="/user">                                        
+                                                <wc-boton @click=${this.getId(user.id)} class="btn-warning" texto="Ver Usuario"></wc-boton>
+                                            </wc-link>
+                                        </td>
+                                    </tr>
+                                `
+                            })
+                        }
                         </tbody>
                     </table>
                 </div>

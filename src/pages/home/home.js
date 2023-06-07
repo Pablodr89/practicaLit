@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit'
-
 class Home extends LitElement {
 
     static get properties() {
@@ -21,17 +20,26 @@ class Home extends LitElement {
 
     constructor() {
         super()
-        this.lista = [
-            {id: 1, nombre: 'Ana', apellidos: 'Mejias Carrascosa', email: 'ana@correo.com', foto: 'https://www.ohchr.org/sites/default/files/styles/hero_5_image_desktop/public/2022-11/women-rights-main-image.jpg?itok=RRGl2PFb'},
-            {id: 2, nombre: 'Pablo', apellidos: 'Dominguez Romero', email: 'pablo@correo.com', foto: 'https://www.ohchr.org/sites/default/files/styles/hero_5_image_desktop/public/2022-11/women-rights-main-image.jpg?itok=RRGl2PFb'},
-            {id: 3, nombre: 'Ana', apellidos: 'Romero Mejias', email: 'romero@correo.com', foto: 'https://www.ohchr.org/sites/default/files/styles/hero_5_image_desktop/public/2022-11/women-rights-main-image.jpg?itok=RRGl2PFb'}
-        ]
+        this.lista = []
+        this.addEventListener('ApiData', e => {
+            this._dataFormat(e.detail.data)
+        })
     }
 
+    _dataFormat(data) {
+        let users = []
+        data['data'].forEach(array => {
+            users.push(array)
+        })
+        
+        this.lista = users
+    }
+    
     render() {
         return html`
             <h1 class="mb-5">App listado de usuarios</h1>
-            <wc-tabla .lista="${this.lista}"></wc-tabla>
+            <get-data url="https://reqres.in/api/users?page=1" method="GET"></get-data>
+            <wc-tabla .lista="${this.lista}"></wc-tabla> 
         `
     }
 }

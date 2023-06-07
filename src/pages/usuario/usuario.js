@@ -4,7 +4,8 @@ class User extends LitElement {
 
     static get properties() {
         return {
-            lista: {type: Array}
+            lista: {type: Array},
+            id: {type: Number}
         }
     }
 
@@ -27,21 +28,36 @@ class User extends LitElement {
 
     constructor() {
         super()
+
+        // this.addEventListener('getId', {
+        //     id: id
+        // })
+
+        // fetch('https://reqres.in/api/users/${this.id}', {method: 'GET'}).then((response) => {
+        //     if(response.ok) return response.json()
+        //     return Promise.reject(response)
+        // }).then((data) => {
+        //     this._sendData(data)
+        // }).catch((error) => {
+        //     console.warn('Algo ha ido mal', error);
+        // })
     }
 
     render() {
         return html`
+            
             <h1>Usuario</h1>
             <hr>
 
             <div class="d-flex justify-content-evenly mt-5">
-                <img src="https://www.ohchr.org/sites/default/files/styles/hero_5_image_desktop/public/2022-11/women-rights-main-image.jpg?itok=RRGl2PFb" class="img-fluid w-50">
+            
+                        <img src="">
 
-                <div>
-                    <h3>Nombre: Pablo</h3>
-                    <h5>Apellidos: Dominguez Romero</h5>
-                    <p>Email: padoro89@gmail.com</p>
-                </div>
+                        <div>
+                            <h3>Nombre:</h3>
+                            <h5>Apellidos:</h5>
+                            <p>Email:</p>
+                        </div>
             </div>
         `
     }

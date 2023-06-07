@@ -10,17 +10,30 @@
     <title>App usuarios</title>
 </head>
 <body>
-    <header class="mb-5">
-        <wc-navbar></wc-navbar>
-    </header>
+    <wc-router>
+        <header class="mb-5">
+            <wc-navbar></wc-navbar>
+        </header>
+    
+        <main class="container">
+    
+            <wc-viewport>
+                <wc-route path="/default">
+                    <wc-home></wc-home>
+                </wc-route>
+    
+                <wc-route path="/crear">
+                    <wc-create></wc-create>
+                </wc-route>
 
-    <main class="container">
-
-        <wc-home></wc-home>
-        <wc-create></wc-create>
-        <wc-user></wc-user>
-
-    </main>
+                <wc-route path="/user">
+                    <wc-user></wc-user>
+                </wc-route>
+            </wc-viewport>       
+    
+        </main>
+    </wc-router>
+    
     
 </body>
 </html>

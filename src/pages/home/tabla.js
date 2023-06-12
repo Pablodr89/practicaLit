@@ -5,7 +5,8 @@ class Tabla extends LitElement {
     static get properties() {
         return {
             lista: {type: Array},
-            id: {type: String, bubbles: true, composed: true}
+            id: {type: String, bubbles: true, composed: true},
+            user: {type: Object}
         }
     }
 
@@ -29,6 +30,7 @@ class Tabla extends LitElement {
     constructor() {
         super()
         this.id = ''
+        this.user = null
     }
 
     _handleClick(e) {
@@ -41,7 +43,10 @@ class Tabla extends LitElement {
             bubbles: true,
             composed: true
         }))
+
+        
     }
+     
 
     render() {
         return html`

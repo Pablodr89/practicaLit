@@ -38,7 +38,7 @@ class Home extends LitElement {
     render() {
         return html`
             <h1 class="mb-5">App listado de usuarios</h1>
-            <get-data url="https://reqres.in/api/users?page=1" method="GET"></get-data>
+            <get-data url="https://reqres.in/api/users" method="GET"></get-data>
             <wc-tabla .lista="${this.lista}"></wc-tabla> 
         `
     }

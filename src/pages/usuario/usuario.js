@@ -5,7 +5,8 @@ class User extends LitElement {
     static get properties() {
         return {
             lista: {type: Array},
-            id: {type: Number}
+            id: {type: String},
+            user:{type: Object}
         }
     }
 
@@ -20,7 +21,7 @@ class User extends LitElement {
                 border: 1px solid black;
             }
             .imagen {
-                width: 10rem;
+                width: 25rem;
             }
           `
         ]
@@ -28,36 +29,55 @@ class User extends LitElement {
 
     constructor() {
         super()
-        this.addEventListener('getId', e => {
-            console.log(e)
-        })
+        this.id = ''
+        this.user = undefined
         
-        // fetch('https://reqres.in/api/users/${this.id}', {method: 'GET'}).then((response) => {
-        //     if(response.ok) return response.json()
-        //     return Promise.reject(response)
-        // }).then((data) => {
-        //     this._sendData(data)
-        // }).catch((error) => {
-        //     console.warn('Algo ha ido mal', error);
-        // })
     }
 
+    connectedCallback() {
+        super.connectedCallback()
+        window.addEventListener('getId', async (e) => {
+            this.id = e.detail.id
+            await this.getId() 
+        }) 
+        
+    }
+
+    async getId() {
+        if(this.id != 0) {
+            await fetch('https://reqres.in/api/users/' + this.id, {method: 'GET'}).then((response) => {
+                return response.ok 
+                    ? response.json() 
+                    : Promise.reject(response);
+            }).then((data) => {
+                this.user = data['data']
+            })
+            .catch((error) => {
+                console.warn('Algo ha ido mal', error);
+            })
+        }
+    }
+    
     render() {
+        const printUser = this.user !== undefined
         return html`
-            
-            <h1>Usuario</h1>
-            <hr>
-
-            <div class="d-flex justify-content-evenly mt-5">
-            
-                        <img src="">
-
+            ${printUser ?
+                html`
+                <h1>Usuario</h1>
+                    <hr>
+                    <div class="d-flex justify-content-evenly mt-5">
+                        <img src="${this.user.avatar}" class="img-fluid imagen">
                         <div>
-                            <h3>Nombre:</h3>
-                            <h5>Apellidos:</h5>
-                            <p>Email:</p>
+                            <h3>Nombre: ${this.user.first_name}</h3>
+                            <h5>Apellidos: ${this.user.last_name}</h5>
+                            <p>Email: ${this.user.email}</p>
                         </div>
-            </div>
+                    </div>
+                `
+                : html `<p>No hay usuario</p>`
+            } 
+            
+            
         `
     }
 }

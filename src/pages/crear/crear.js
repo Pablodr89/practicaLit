@@ -132,7 +132,7 @@ class Create extends LitElement {
                     </div>
                 </div>
             </div>
-            <div class="exito alert alert-success mt-3"></div>
+            <div class="exito alert alert-success text-center mt-3"></div>
             `
     }
 }
